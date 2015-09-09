@@ -1,0 +1,32 @@
+<div class='pagination-container'>
+<div class="page-count">Page <%= page %> of <%= pages %></div>
+<div style="clear:both;"></div>
+<ul class="pagination">
+<%
+if(page > 1){
+%>
+<li><a href="<%=pagination%><%= page -1%>"> <</a></li>
+<%
+}
+%>
+<% for(var i=1; i<=pages; i++){
+	if(i == page){
+	%>
+		<li class='selected'><a><%= i %></a></li>
+	<%
+	} else {
+%>
+	<li><a href="<%=pagination%><%= i %>"><%= i %></a></li>
+<%
+	}
+}
+%>
+<%
+if(page < pages){
+%>
+<li><a href="<%=pagination%><%= page-(-1)%>"> ></a></li>
+<%
+}
+%>
+</ul>
+</div>

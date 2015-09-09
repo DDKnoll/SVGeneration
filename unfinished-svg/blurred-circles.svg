@@ -1,0 +1,14 @@
+<svg xmlns='http://www.w3.org/2000/svg' width='100%' height='100%'>
+	<defs>
+		<filter id='b'>
+			<feGaussianBlur stdDeviation='50' />
+		</filter>
+	</defs>
+	<g filter='url(#b)'>
+		<rect width='100%' height='100%' fill='#ccc'/>
+		<circle cx='0' cy='0' r='80%' fill='rgba(50,80,120,.5)'/>
+		<circle cx='0' cy='100%' r='50%' fill='rgba(80,120,50,.5)'/>
+		<circle cx='100%' cy='0' r='60%' fill='rgba(80,0,80,.5)'/>
+		<circle cx='100%' cy='100%' r='80%' fill='rgba(120,80,0,.5)'/>
+	</g>
+</svg>

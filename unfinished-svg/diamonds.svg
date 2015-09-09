@@ -1,0 +1,65 @@
+<svg xmlns='http://www.w3.org/2000/svg' xmlns:xlink='http://www.w3.org/1999/xlink' preserveAspectRatio="xMidYMid slice" viewBox='0 0 800 300'>
+	<path class='base' d='M0,0h800v300h-800'/>
+	<!-- Outermost Layer -->
+	<path class='base' d='M50,-50l700,0l50,240l-60,180l-600,0l-140,-130'/>
+	<path class='highlight' d='M800,20l-30,25l-39,-10l10,-40h50'/>
+	<!-- Fifth Layer -->
+	<path class='base' d='M200,-40l550,0l-50,200l30,200h-650l30,-100l-40,-120'/>
+	<path class='highlight' d='M110,260l-110,-20l70,-100'/>
+	<path class='highlight' d='M680,130l20,30l100,30l-90,35l-87,75'/>
+	<path class='highlight' d='M70,140l36,-50l-65,-90l-90,35l-87,75'/>
+	<!-- Fourth Layer -->
+	<path class='base' d='M330,-40l200-30l150,200l-100,300l-400,-100l-30,-200l60,-150'/>
+	<path class='highlight' d='M540,10l140,120l60,-130v-36'/>
+	<path class='highlight' d='M680,130l-130,160l73,10z'/>
+	<path class='highlight' d='M202,0l18,35l-70,95z'/>
+	<path class='highlight' d='M70,140l80,-10l60,45l-45,55l-55,30z'/>
+	
+	<!-- Third Layer -->
+	<path class='base' d='M430,-10l110, 20l50,80l-40,200l-100,5l-200-30l-40,-90l30,-40l-20,-100z'/>
+	<path class='highlight' d='M430,-10l-80,45l-130,0z'/>
+	<path class='highlight' d='M430,-10l40,55l70,-35z'/>
+	<path class='highlight' d='M470,45l120,45l-55,102z'/>
+	<path class='highlight' d='M220,35l60,35l-40,65z'/>
+	<path class='highlight' d='M345,221l140,50l-35,24z'/>
+	
+	<!-- Second Layer -->
+	<path class='base' d='M350,35l120,10l65,146l-50,80l-140,-50l-80,10l-5,-81l20,-80z'/>
+	<path class='highlight' d='M350,35l50,15l-120,20z'/>
+	<path class='highlight' d='M346,221l10,-50l-91,60l-15,34z'/>
+	<path class='highlight' d='M440,190l95,1l-50,80l-140,-50z'/>
+	<!-- Inner Layer -->
+	<path class='base' d='M400,50l-140,100l180,40l50,-100z'/>
+	<path class='highlight' d='M400,50l-140,100l110,-10z'/>
+	<path class='highlight' d='M400,50l40,140l-70,-50l-60,-26z'/>
+</svg>
+
+
+.svg-canvas{
+	background-color: #49d;
+	-webkit-transform:scale(1);
+	width:800;
+	height: 300;
+}
+svg{
+	width: 100%;
+	height: auto;
+}
+path.base{
+	fill-opacity:.2;
+	fill: #fff;
+	-webkit-transition: all .5s linear;
+	-moz-transition: all .5s linear;
+}
+path.highlight{
+	fill-opacity: .25;
+	fill: #fff;
+	-webkit-transition: all .3s linear;
+	-moz-transition: all .3s linear;
+}
+path.highlight:hover, path.base:hover{
+	fill-opacity:.5;
+}
+svg {
+	overflow:hidden;
+}

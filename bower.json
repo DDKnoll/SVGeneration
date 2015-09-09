@@ -1,0 +1,7 @@
+{
+  "name": "svgeneration",
+  "version": "0.0.0",
+  "dependencies": {
+    "react": "~0.13.3"
+  }
+}

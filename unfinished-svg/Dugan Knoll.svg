@@ -1,0 +1,41 @@
+<svg xmlns='http://www.w3.org/2000/svg' width='550' height='140'>
+	<path class='letter fillIt' id='Dlet' d='M12,96h23c37,0 37,-64 0,-64h-23v64z'/>
+	<path class='letter fillIt' id='ulet' d='M83,48v30c-2,30 33,20 33,0v-30v51'/>
+	<path class='letter fillIt' id='glet' d='M172,48v26c0,29 -37,32 -37,0c0,-29 37,-32 37,0v27c0,23 -35,22 -35,5'/>
+	<path class='letter fillIt' id='alet' d='M228,48v26c0,29 -37,32 -37,0c0,-29 37,-32 37,0v18c0,5 5,4 5,5'/>
+	<path class='letter fillIt' id='nlet' d='M249,48v51v-28c0,-22 36,-33 34,0v28'/>
+	
+	<path class='letter fillIt' id='Klet' d='M334,28v71v-25l45,-45l-28,28l30,42'/>
+	<path class='letter fillIt' id='nlet2' d='M399,48v51v-28c0,-22 36,-33 34,0v28'/>
+	<path class='letter fillIt' id='olet' d='M472,49c27,2 24,50 0,49c-29,0 -27,-49 0,-49z'/>
+	<path class='letter fillIt' id='llet' d='M510,28v71'/>
+	<path class='letter fillIt' id='llet2' d='M532,28v71'/>
+</svg>
+<script type='text/css'>
+.svg-canvas{
+	background-color: #fff;
+}
+path {
+	  -webkit-transition: all 2.5s ease-in-out, fill 1s ease-in;
+	  -webkit-transition-delay: 0s, 2.5s;
+	  -moz-transition: all 2.5s ease-in-out, fill 1s ease-in 2.5s;
+	  -o-transition: all 2.5s ease-in-out, fill 1s ease-in 2.5s;
+	  transition: all 2.5s ease-in-out, fill 1s ease-in 1.5s;
+	fill: transparent;
+	stroke-width: 2;
+	stroke: #fff;
+	stroke-dasharray: 252px, 252px;
+	stroke-dashoffset: 252px;
+}
+
+body {
+  background-color: #BF2F2F;
+  text-align: center;
+  padding-top: 10%;
+}
+path.fillIt {
+	stroke-dashoffset: 0;
+	stroke: #36d;
+}
+
+</script>

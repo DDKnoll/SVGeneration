@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html>
+  <head>
+  	<meta name="description" content="<%= metaDesc %>">
+  	<meta property="og:title" content="SVGeneration" />
+	<meta property="og:type" content="website" />
+	<meta property="og:url" content="<%= metaURL %>" />
+  	<meta property="og:image" content="http://svgeneration.com/images/logo.png" />
+  	<meta name="keywords" content="<%= metaKeywords %>">
+  	<meta http-equiv="content-type" content="text/html;charset=UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=yes" />
+    <title><%= title %></title>
+    <% if(section == 'Editor'){%>
+    <link rel="stylesheet" href="/miniColors/jquery.minicolors.css" />
+    <link href="/javascripts/jquery-ui-1.10.3.custom/css/ui-darkness/jquery-ui-1.10.3.custom.min.css" rel="stylesheet">
+	<% } %>
+    <link rel='stylesheet' href='/stylesheets/style3.css' />
+    <link rel="stylesheet" href="/css/svgenicons.css">
+    <!--[if lt IE 9]>
+    <script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script><![endif]-->
+    <script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+    <script>
+		window.jQuery || document.write('<script src="/javascripts/jquery-1.9.1.min.js"><\/script>')
+	</script>
+    <script src="/javascripts/modernizr.custom.js"></script>
+    <script src="/javascripts/Ractive.js"></script>
+    <script src="/javascripts/editor-helper.js"></script>
+    <% if(section == 'Editor'){%>
+    <script type='text/javascript' src='/javascripts/ZeroClipboard.min.js'></script>
+	<script src="/miniColors/jquery.minicolors.js" type="text/javascript"></script>
+	<script src="http://ajax.googleapis.com/ajax/libs/jqueryui/1.10.3/jquery-ui.min.js"></script>
+	<script src="/ace-builds/src-min-noconflict/ace.js" type="text/javascript" charset="utf-8"></script>
+	<script>
+	window.jQuery.slider ||
+	document.write('<script type="text/javascript" src="/javascripts/jquery-ui-1.10.3.custom/js/jquery-ui-1.10.3.custom.min.js"><\/script>');
+	</script>
+	<!--<script src="/javascripts/jquery.ui.touch-punch.min.js"></script>-->
+	<script src="/javascripts/svg-error-check.js"></script>
+	<% } %>
+	<script type='text/javascript'>
+	/**
+	 * This code runs the mobile menu.
+	 */
+	$(document).ready(function(){
+
+		Modernizr.load({
+		  	test: Modernizr.svg,
+		  	yep : '/javascripts/svg.js',
+		  	nope: '/javascripts/no-svg.js'
+		});
+
+		$('#mobile-menu-button').click(function() {
+			$('div.navBox').toggleClass('selected');
+			$('#mobile-menu-button').toggleClass('selected');
+		});
+	});
+	</script>
+  </head>
+  <body>
+  	<div id="fb-root"></div>
+		<script>(function(d, s, id) {
+		  var js, fjs = d.getElementsByTagName(s)[0];
+		  if (d.getElementById(id)) return;
+		  js = d.createElement(s); js.id = id;
+		  js.src = "//connect.facebook.net/en_US/all.js#xfbml=1";
+		  fjs.parentNode.insertBefore(js, fjs);
+		}(document, 'script', 'facebook-jssdk'));</script>

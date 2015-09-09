@@ -1,0 +1,58 @@
+nav{
+  position:relative;
+  height:64px;
+  width:100%;
+  z-index:100;
+  .logo-link{
+    padding:12px;
+    text-decoration: none;
+    display:block;
+    svg{
+      vertical-align: middle;
+      display:inline-block;
+      height:36px;
+    }
+    .title{
+      font-family: 'Roboto Slab', sans-serif;
+      margin-left:16px;
+      display:inline-block;
+      vertical-align: middle;
+      font-size: 24px;
+      color: $blue;
+      font-weight:300;
+    }
+  }
+  .browse-all-button{
+    cursor:pointer;
+    padding:15px;
+    position:absolute;
+    top:0;
+    right:0;
+  }
+  .menu-dropdown{
+    position:absolute;
+    width:300px;
+    right:0;
+    top:64px;
+    transform: translateX(300px);
+    transition: .5s all ease;
+    background-color: #ffffff;
+    border:1px solid #eeeeee;
+    overflow-y:scroll;
+    max-height:480px;
+    &.active{
+      transform: translateX(0px);
+      opacity:1;
+    }
+    ul {
+      margin:0;
+      padding:0;
+      list-style: none;
+      a{
+        text-decoration: none;
+        display:inline-block;
+        padding:8px;
+      }
+    }
+  }
+}

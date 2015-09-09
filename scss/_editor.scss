@@ -1,0 +1,46 @@
+.editor{
+  position:relative;
+  .svg-target{
+    position:absolute;
+    top:0;
+    left:0;
+    width:100%;
+    height:100%;
+  }
+  padding: 32px;
+  background-color: #ffffff;
+  .editor-controls{
+    position:relative;
+    z-index:10;
+    margin:auto;
+    max-width:600px;
+    background-color: #ffffff;
+    border:1px solid #ffffff;
+  }
+  .description{
+    padding:16px;
+  }
+  .image-title {
+    font-weight: 300;
+    font-size: 24px;
+  }
+}
+.tab-bar{
+  max-width: 600px;
+  margin:auto;
+  .tab{
+    border:1px solid $gray;
+    padding:1em 0;
+    font-size:14px;
+    cursor:pointer;
+    box-sizing: border-box;
+    text-align:center;
+    &.active {
+      background-color: $gray;
+    }
+  }
+}
+.inner-tab{
+  padding:1em;
+  background-color: $gray;
+}

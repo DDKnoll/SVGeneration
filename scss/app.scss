@@ -1,0 +1,23 @@
+@import './variables';
+@import './navbar';
+@import './footer';
+@import './editor';
+@import './showcase';
+body {
+  font-family: 'Roboto', sans-serif;
+  font-size:18px;
+}
+
+h1, h2, h3, h4, h5{
+  font-family: 'Roboto Slab', serif;
+}
+a {
+  color: $blue;
+  &:visited{
+    color: $blue;
+  }
+}
+
+article {
+  font-family: 'Lora', serif;
+}

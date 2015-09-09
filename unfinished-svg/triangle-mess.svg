@@ -1,0 +1,16 @@
+<svg xmlns='http://www.w3.org/2000/svg' width='100%' height='100%' viewBox='0 0 100 50'>
+	<path fill='#fff' d='M100,11v-12h-100v1'/>
+	<path fill='#aaa' d='M0,0l100,10v1h-100'/>
+	
+	<path fill='#ddd' d='M100,10h-100v11'/>
+	<path fill='#ccc' d='M0,20l100,-10v11'/>
+	
+	<path fill='#eee' d='M0,20h100v11'/>
+	<path fill='#aaa' d='M0,20l100,10v1h-100'/>
+	
+	<path fill='#bbb' d='M100,30h-100v11'/>
+	<path fill='#fff' d='M0,40l100,-10v11'/>
+	
+	<path fill='#ddd' d='M0,40h100v11'/>
+	<path fill='#ccc' d='M0,40l100,10v1h-100'/>
+</svg>

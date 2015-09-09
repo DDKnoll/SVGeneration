@@ -1,0 +1,23 @@
+<% include ../common/header %>
+<div class="main tools">
+	<div id="article">
+		<h1>Base 64 Decoder</h1>
+		<h3>Insert Base-64 Encoded CSS Here:</h3>
+		<textarea id='encoded' name="textarea" rows="10" cols="70">Paste Base-64 Encoded SVG here.</textarea>
+		<h3>Output:</h3>
+		<textarea id='decoded' name="textarea" rows="20" cols="70">Decoded SVG will show up here.</textarea>
+	</div>
+	<script type='text/javascript'>
+	$('#encoded').change(function(){
+		var input = $('#encoded').val();
+		console.log(input);
+		input = input.replace(/(.|\s)*base64,/g,'');
+		console.log(input);
+		input = input.replace(/'\)(.|\s)*/g,'');
+		input = input.trim();
+		console.log(input);
+		$('#decoded').val(window.atob(input));
+	})
+	</script>
+</div>
+<% include ../common/footer %>

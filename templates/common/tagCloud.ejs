@@ -1,0 +1,18 @@
+	<!--<h3 id="tagTitle">Filter by tag</h3>-->
+	<div id="tagCloud">
+	<h3 style="color: #555; text-shadow:none;">Tags</h3>
+	<div class="divider" style="margin-top:-1.5em;"></div>	
+	<%
+	var total = 0;
+	tagCloud.forEach(function(tag){
+		total += tag.count;
+	});
+	console.log(total);
+	tagCloud.forEach(function(tag){
+	var fontSize = .7+(tag.count * 5)/total;
+	%>
+	 	&nbsp;
+		<a href="/tag/<%= tag.name %>"><span style="font-size: <%= fontSize %>em;"><%= tag.name %></span></a>
+		&nbsp;		
+	<% }); %>
+	</div>

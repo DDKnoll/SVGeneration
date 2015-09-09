@@ -1,0 +1,37 @@
+[
+  {
+    "title": "Intro to SVG",
+    "meta": "",
+    "uri": "intro-to-svg"
+  },
+  {
+    "title": "SVG Browser Support",
+    "meta": "",
+    "uri": "browser-support"
+  },
+  {
+    "title": "Why SVG?",
+    "meta": "",
+    "uri": "why-svg"
+  },
+  {
+    "title": "SVG For the Web 101: How to use and Best Practices",
+    "meta": "",
+    "uri": "how-to-use"
+  },
+  {
+    "title": "Browser Rendering Bugs",
+    "meta": "",
+    "uri": "svg-browser-bugs"
+  },
+  {
+    "title": "Using the Code Editor",
+    "meta": "",
+    "uri": "code-editor"
+  },
+  {
+    "title": "This site is still in Beta",
+    "meta": "",
+    "uri": "beta"
+  }
+]

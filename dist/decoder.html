@@ -1,0 +1,82 @@
+
+
+<!DOCTYPE html>
+<html>
+  <head>
+  	<meta name="google-site-verification" content="y71-o_WFAUd1plgZRa-7fJ-2x0NJK49gTBny9lAzbEI" />
+  	<meta name="viewport" content="width=device-width">
+  	<meta name="description" content="Generate custom SVG graphics for use in graphic design projects.">
+  	<meta property="og:title" content="SVGeneration" />
+  	<meta property="og:type" content="website" />
+  	<meta property="og:url" content="http://svgeneration.com" />
+  	<meta property="og:image" content="http://svgeneration.com/images/brush_wrench_leaves.svg" />
+  	<meta name="keywords" content="SVGeneration, svg, graphics, generate, pattern, background">
+  	<meta http-equiv="content-type" content="text/html;charset=UTF-8">
+	<!-- <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=yes" /> -->
+    <title>SVGeneration</title>
+    <link rel="stylesheet" href="/sources/fontello-e531d950/css/fontello.css">
+    <link href='https://fonts.googleapis.com/css?family=Roboto:300,400|Roboto+Slab:300,400' rel='stylesheet' type='text/css'>
+    <!--[if lt IE 9]>
+    <script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script><![endif]-->
+    <link rel="stylesheet" href="http://yui.yahooapis.com/pure/0.6.0/pure-min.css">
+    <link rel="stylesheet" href="style.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
+	<script>
+		window.jQuery || document.write('<script src="/javascripts/jquery-1.9.1.min.js"><\/script>')
+	</script>
+  </head>
+  <body>
+  <div class="react-element" id="editor-mount" data-react-component="SVGeneration.Navbar"></div>
+<div class="main tools">
+	<div id="article">
+		<h1>Base 64 Decoder</h1>
+		<h3>Insert Base-64 Encoded CSS Here:</h3>
+		<textarea id='encoded' name="textarea" rows="10" cols="70">Paste Base-64 Encoded SVG here.</textarea>
+		<h3>Output:</h3>
+		<textarea id='decoded' name="textarea" rows="20" cols="70">Decoded SVG will show up here.</textarea>
+	</div>
+	<script type='text/javascript'>
+	$('#encoded').change(function(){
+		var input = $('#encoded').val();
+		console.log(input);
+		input = input.replace(/(.|\s)*base64,/g,'');
+		console.log(input);
+		input = input.replace(/'\)(.|\s)*/g,'');
+		input = input.trim();
+		console.log(input);
+		$('#decoded').val(window.atob(input));
+	})
+	</script>
+</div>
+<div id="footer">
+	&copy;
+	<script type="text/javascript">
+	var d = new Date()
+	document.write(d.getFullYear())
+	</script>
+	<noscript>
+	2013
+	</noscript>
+	SVGeneration | <a href="/license.html">License</a> | <a href="/contact.html">Contact</a>
+</div> 
+<script src="app.js"></script>
+<script type='text/javascript' id="__bs_script__">//<![CDATA[
+    document.write("<script async src='http://HOST:3000/browser-sync/browser-sync-client.2.9.1.js'><\/script>".replace("HOST", location.hostname));
+//]]></script>
+
+<script type="text/javascript">
+
+  var _gaq = _gaq || [];
+  _gaq.push(['_setAccount', 'UA-40579003-1']);
+  _gaq.push(['_trackPageview']);
+
+  (function() {
+    var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+    ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+    var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+  })();
+
+</script>
+</div>
+  </body>
+</html>

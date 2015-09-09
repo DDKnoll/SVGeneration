@@ -1,0 +1,35 @@
+    <svg class='box-wrapper' xmlns='http://www.w3.org/2000/svg' xmlns:xlink='http://www.w3.org/1999/xlink'>
+        <svg width='50%' height='50%' x='0' y='0'>
+            <path class='box-corner' d='M10,510v-480c0,-12 8,-20 20,-20h800v500'/>
+        </svg>
+        <g transform='matrix(1 0 0 -1 0 0)'>
+            <svg width='50%' height='50%' x='0' y='-100%'>
+                <path class='box-corner' d='M10,510v-400c0,-65 35,-100 100,-100h800v500'/>
+            </svg>
+        </g>
+        <g transform='matrix(-1 0 0 -1 0 0)'>
+            <svg width='50%' height='50%' x='-100%' y='-100%'>
+                <path class='box-corner' d='M10,510v-480c0,-12 8,-20 20,-20h800v500'/>
+            </svg>
+        </g>
+        <g transform='matrix(-1 0 0 1 0 0)'>
+        <svg width='50%' height='50%' x='-100%' y='0'>
+            <path class='box-corner' d='M10,510v-400c0,-65 35,-100 100,-100h800v500'/>
+        </svg>
+        </g>
+    </svg>
+    .svg-canvas{
+    width: 800px;
+    height: 300px;
+    background-color: #2bc;
+}
+path.top{
+    fill:#fff;
+    stroke: #ccc;
+    stroke-width: 1;
+}
+path.shadow{
+    fill:#ddd;
+    stroke: transparent;
+    stroke-width: 3;
+}

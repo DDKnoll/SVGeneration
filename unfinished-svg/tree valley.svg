@@ -1,0 +1,15 @@
+<svg xmlns='http://www.w3.org/2000/svg' width='100%' height='150'>
+	<rect x='0' y='140' width='100%' height='100%' fill='#fff'/>
+	<svg x='50%' y='140' overflow='visible'>
+		<path fill='#fff' d='M-20,0 C-15,0 -5,-10 -10,-50
+		l-20,3l22,-20 l-20,3l22,-20 l-20,3l22,-20 l-20,3l22,-20 l-20,3l22,-20
+		l22,20l-20,-3 l22,20l-20,-3 l22,20l-20,-3 l22,20l-20,-3 l22,20l-20,-3
+		C5,-10 15,0 20,0 z'/>
+	</svg>
+	<svg x='0' y='140' overflow='visible'>
+		<path fill='#fff' d='M0,-18C0,0 40,0 100,0H-10z'/>
+	</svg>
+	<svg x='100%' y='140' overflow='visible'>
+		<path fill='#fff' d='M0,-18C0,0 -40,0 -100,0h100z'/>
+	</svg>
+</svg>

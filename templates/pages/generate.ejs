@@ -1,0 +1,25 @@
+<% include ../common/header %>
+<div class='top-story'>
+	<div class="top-story-inner">
+	<h1 class='generate-title'><%= "pattern.title" %></h1>
+	<h4 class='generate-author'>By:<a href='pattern.author.url' ><%= "pattern.author.name" %></a></h4>
+	<p class="edit-instructions"><%- "pattern.instructions" %></p>
+	<%
+	if( true/*pattern.filter == 'true'*/){
+	%>
+		<p><i class="icon-attention"></i>This pattern uses SVG Filters. Only about 73% of website visitors will see the full graphic. SVG Filters are not supported by the Android Browser, IE9, or Safari 5. <a target="_blank" href='http://caniuse.com/svg-filters'>SVG&nbsp;Filter&nbsp;Support</a></p>
+	<%
+	}
+	%>
+	</div>
+</div>
+<div class="main <%= "pattern.shade" %>" style="background-image:url('data:image/svg+xml;base64,<%= "pattern.base64" %>');">
+<div id="editor-container">
+	<% "include editor" %>
+</div>
+<div id="right">
+
+</div>
+<div style="clear:both;"></div>
+</div>
+<% include ../common/footer %>
