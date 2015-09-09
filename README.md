@@ -1,2 +1,3 @@
 # SVGeneration
-Generate SVG background graphics and patterns
+> Generates SVG images
+
