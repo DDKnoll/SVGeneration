@@ -229,7 +229,7 @@ SVGeneration.IntegerSlider = React.createClass({
     return (
       <div className='param-control'>
         <label htmlFor={"param-" + this.props.param.name}>{this.props.param.name}</label>
-        <div>
+        <div className='input-control'>
           <input id={"param-" + this.props.param.name} value={this.props.param.value} />
           <div className='slider' ref='slider' />
         </div>
@@ -243,7 +243,7 @@ SVGeneration.ColorPicker = React.createClass({
     return (
       <div className='param-control'>
         <label htmlFor="">{this.props.param.name}</label>
-        <div>
+        <div className='input-control'>
           <input id={this.props.param.name} value={this.props.param.value} />
           <div ref='color-picker' />
         </div>

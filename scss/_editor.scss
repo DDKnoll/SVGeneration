@@ -48,6 +48,30 @@
     color: $gray-3;
     margin: 16px 0 8px;
   }
+  .input-control{
+    position:relative;
+    input{
+      display:inline-block;
+      width:100px;
+      height:28px;
+    }
+    .slider{
+      height:8px;
+      border-radius: 4px;
+      background: $gray-3;
+      position: absolute;
+      left: 116px;
+      right: 0;
+      top: 12px;
+      .ui-slider-handle{
+        width: 1em;
+        height: 1em;
+        border-radius: 1em;
+        background: $gray-2;
+        border: 1px solid #ffffff;
+      }
+    }
+  }
 }
 .inner-tab{
   padding:1em;
