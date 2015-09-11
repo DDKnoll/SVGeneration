@@ -1,3 +1,3 @@
 # SVGeneration
-> Generates SVG images
 
+This project is still a work in progress. The hosting for SVGeneration went down because some of the node.js libraries that I used were no longer supported.  Rather than fixing and deploying that old project, I decided it was ripe time to get this open source project on github where it belongs.  I have the basics for the static html site in place, but it still needs a week or two of work.

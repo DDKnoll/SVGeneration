@@ -1,5 +1,6 @@
 
 typeof(SVGeneration) == "undefined" && (SVGeneration = {});
+
 SVGeneration.Editor = React.createClass({displayName: "Editor",
   getInitialState: function() {
     return {
@@ -25,7 +26,7 @@ SVGeneration.Editor = React.createClass({displayName: "Editor",
     var node = document.createElement('div');
     node.setAttribute('class', 'svg-target');
     var style = "background-color: #"+(this.state.image.bgColor ? this.state.currentParameters[this.state.image.bgColor] : 'ffffff')+';';
-    style = style + this.state.image.cssRules;
+    style = style + (!!this.state.image.cssRules ? this.state.image.cssRules : '');
     style = style + " background-image:"+this.dataURI()+";"
     node.setAttribute('style',style);
     var tmp = document.createElement("div");
@@ -33,9 +34,8 @@ SVGeneration.Editor = React.createClass({displayName: "Editor",
     return tmp.innerHTML;
   },
   loadData: function(){
-    var img = (/[\?\&]img=(.*)\&?/g).exec(window.location.search)[1];
     $.ajax({
-      url: '/recipes/'+img+'/config.json',
+      url: './config.json',
       type: 'get',
       success: function (data) {
         var currentParameters = {};
@@ -49,7 +49,7 @@ SVGeneration.Editor = React.createClass({displayName: "Editor",
       }.bind(this)
     });
     $.ajax({
-      url: '/recipes/'+img+'/script.js',
+      url: './script.js',
       type: 'get',
       success: function (data) {
         this.setState({script: data});
@@ -58,6 +58,11 @@ SVGeneration.Editor = React.createClass({displayName: "Editor",
   },
   navigate: function(active){
     this.setState({active: active})
+  },
+  setParam: function(key, value){
+    var newParams = this.state.currentParameters;
+    newParams[key] = value;
+    this.setState({currentParameters: newParams});
   },
   generate: function(){
     var params = [];
@@ -77,7 +82,7 @@ SVGeneration.Editor = React.createClass({displayName: "Editor",
   render: function() {
     var inner;
     var img;
-    var topPadding = this.state.windowHeight - 64 - 164;
+    var topPadding = this.state.windowHeight - 64 - 256;
     if(this.state.image && this.state.script){
       img = (React.createElement("div", {className: "target-wrap", dangerouslySetInnerHTML: {__html: this.renderSVG()}}));
       this.generate();
@@ -85,10 +90,10 @@ SVGeneration.Editor = React.createClass({displayName: "Editor",
         React.createElement("div", null, 
           React.createElement("div", {className: "description"}, 
             React.createElement("h1", {className: "image-title"}, this.state.image.title), 
-            React.createElement("p", {className: "image-description"}, this.state.image.instructions)
+            React.createElement("p", {className: "image-description", dangerouslySetInnerHTML: {__html:this.state.image.instructions}})
           ), 
           React.createElement(SVGeneration.TabBar, {navigate: this.navigate, active: this.state.active}), 
-          React.createElement(SVGeneration.Tabs, {image: this.state.image, active: this.state.active, style: {height: this.state.windowHeight-128}})
+          React.createElement(SVGeneration.Tabs, {setParam: this.setParam, image: this.state.image, active: this.state.active, style: {height: this.state.windowHeight-128}})
         )
       )
       var style = {
@@ -96,9 +101,11 @@ SVGeneration.Editor = React.createClass({displayName: "Editor",
         opacity: 1,
       }
     } else {
-      inner = (React.createElement("div", null, 
-              "Loading Data"
-            ));
+      inner = (
+        React.createElement("div", null, 
+          "Loading Data"
+        )
+      );
       var style = {paddingTop: topPadding, opacity: 0};
     }
     return (
@@ -137,11 +144,11 @@ SVGeneration.Tabs = React.createClass({displayName: "Tabs",
   render: function(){
     var inner = '';
     if (this.props.active == 'Parameters') {
-      inner = React.createElement(SVGeneration.ParamsTab, null)
+      inner = React.createElement(SVGeneration.ParamsTab, {setParam: this.props.setParam, image: this.props.image})
     } else if (this.props.active == 'Source Code') {
-      inner = React.createElement(SVGeneration.SourceTab, null)
+      inner = React.createElement(SVGeneration.SourceTab, {image: this.props.image})
     } else {
-      inner = React.createElement(SVGeneration.ExportTab, null)
+      inner = React.createElement(SVGeneration.ExportTab, {image: this.props.image})
     }
     return (
       React.createElement("div", {style: this.props.style, className: "inner-tab"}, 
@@ -152,10 +159,25 @@ SVGeneration.Tabs = React.createClass({displayName: "Tabs",
 });
 
 SVGeneration.ParamsTab = React.createClass({displayName: "ParamsTab",
+  renderParam: function(param){
+    var props = {
+      param: param,
+      setParam: this.props.setParam
+    }
+    if(param.type == 'int'){
+      return React.createElement(SVGeneration.IntegerSlider, React.__spread({},  props))
+    } else if(param.type == 'color'){
+      return React.createElement(SVGeneration.ColorPicker, React.__spread({},  props))
+    } else {
+      return React.createElement("input", null)
+    }
+  },
   render: function(){
     return (
-      React.createElement("div", {className: ""}, 
-        "Params"
+      React.createElement("div", {className: "params"}, 
+        
+          this.props.image.parameters.map(this.renderParam)
+        
       )
     );
   }
@@ -182,14 +204,51 @@ SVGeneration.ExportTab = React.createClass({displayName: "ExportTab",
 });
 
 SVGeneration.IntegerSlider = React.createClass({displayName: "IntegerSlider",
+  componentDidMount: function() {
+    var step = 10;
+     if (this.props.param.max - this.props.param.min < 5){
+      step = .01;
+    } else if (this.props.param.max - this.props.param.min < 10) {
+      step = .1;
+    } else if (this.props.param.max - this.props.param.min < 100){
+      step = 1;
+    }
+    var options = {
+      min: this.props.param.min,
+      max: this.props.param.max,
+      step: step,
+      value: this.props.param.default,
+      slide: function(event, ui){
+        this.props.setParam(this.props.param.name, ui.value);
+      }.bind(this),
+    };
+    console.log(options)
+    $(React.findDOMNode(this.refs.slider)).slider(options);
+  },
   render: function(){
-    return
+    return (
+      React.createElement("div", {className: "param-control"}, 
+        React.createElement("label", {htmlFor: "param-" + this.props.param.name}, this.props.param.name), 
+        React.createElement("div", null, 
+          React.createElement("input", {id: "param-" + this.props.param.name, value: this.props.param.value}), 
+          React.createElement("div", {className: "slider", ref: "slider"})
+        )
+      )
+    )
   }
 });
 
 SVGeneration.ColorPicker = React.createClass({displayName: "ColorPicker",
   render: function(){
-    return
+    return (
+      React.createElement("div", {className: "param-control"}, 
+        React.createElement("label", {htmlFor: ""}, this.props.param.name), 
+        React.createElement("div", null, 
+          React.createElement("input", {id: this.props.param.name, value: this.props.param.value}), 
+          React.createElement("div", {ref: "color-picker"})
+        )
+      )
+    )
   }
 })
 

@@ -40,6 +40,15 @@
     }
   }
 }
+.param-control{
+  label{
+    display:block;
+    font-size: 18px;
+    font-weight: 300;
+    color: $gray-3;
+    margin: 16px 0 8px;
+  }
+}
 .inner-tab{
   padding:1em;
   background-color: $gray;

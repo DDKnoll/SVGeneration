@@ -50,7 +50,7 @@ SVGeneration.GraphicList = React.createClass({displayName: "GraphicList",
             this.props.graphics.map(function(img){
               return (
                 React.createElement("li", null, 
-                  React.createElement("a", {href: "/editor.html?img="+img}, img)
+                  React.createElement("a", {href: "/recipes/"+img}, img)
                 )
               );
             })

@@ -1,12 +1,4 @@
 module.exports = function (grunt) {
-  /** var fs = require('fs');
-  var folders = [];
-
-  var articles = [];
-  fs.readFileSync('articles.json', function (err, data) {
-    articles = JSON.parse(data);
-  });
-  console.log(articles); */
 
   var concatJS = [
     'js/_bower.js',
@@ -62,10 +54,19 @@ module.exports = function (grunt) {
     bower_concat: {
       all: {
         dest: 'js/_bower.js',
-      }
+        mainFiles: {
+          'ace-builds': ['src-min/ace.js']
+        }
+      },
     },
 
     copy: {
+      'jquery-ui': {
+        cwd: 'bower_components/jquery-ui/themes/flick',
+        src: '**/*',
+        dest: 'sources/flick',
+        expand: true
+      },
       all: {
         src: ['*.css', '*.html', 'images/**/*', 'sources/**/*', 'recipes/**/*', '!Gruntfile.js'],
         dest: 'dist/',
@@ -104,13 +105,14 @@ module.exports = function (grunt) {
     },
 
     watch: {
-      options: {
-        livereload: true
-      },
 
+      grunt: {
+        files: 'Gruntfile.js',
+        tasks: ['default'],
+      },
       html: {
         files: 'templates/**/*.ejs',
-        tasks: ['ejs'],
+        tasks: ['default'],
       },
       sass: {
         files: 'scss/**/*.scss',
@@ -142,7 +144,7 @@ module.exports = function (grunt) {
 
   require('matchdep').filterDev('grunt-*').forEach(grunt.loadNpmTasks);
 
-  grunt.registerTask('default', ['ejs', 'shell', 'sass', 'bower_concat', 'concat', 'copy']);
+  grunt.registerTask('default', ['ejs', 'shell', 'sass', 'build-images', 'bower_concat', 'concat', 'copy']);
 
   grunt.registerTask('serve', 'start the static file watch compiler and browsersync', function () {
     grunt.task.run([
@@ -151,6 +153,18 @@ module.exports = function (grunt) {
       'browserSync:livereload',
       'watch'
     ]);
+  });
+
+  grunt.registerTask('build-images', 'This creates all of the static html files for each graphic', function () {
+    var fs = require('fs');
+
+    var editorTemplate = fs.readFileSync('dist/editor.html', 'utf8');
+
+    var images = JSON.parse(fs.readFileSync('recipes/data.json', 'utf8'));
+    images.map(function (img) {
+      //Copy each of the html files
+      fs.writeFile('recipes/' + img + '/index.html', editorTemplate);
+    });
   });
 
   grunt.registerTask('deploy', ['default', 'gh-pages']);

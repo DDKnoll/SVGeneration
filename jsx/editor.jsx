@@ -1,5 +1,6 @@
 
 typeof(SVGeneration) == "undefined" && (SVGeneration = {});
+
 SVGeneration.Editor = React.createClass({
   getInitialState: function() {
     return {
@@ -25,7 +26,7 @@ SVGeneration.Editor = React.createClass({
     var node = document.createElement('div');
     node.setAttribute('class', 'svg-target');
     var style = "background-color: #"+(this.state.image.bgColor ? this.state.currentParameters[this.state.image.bgColor] : 'ffffff')+';';
-    style = style + this.state.image.cssRules;
+    style = style + (!!this.state.image.cssRules ? this.state.image.cssRules : '');
     style = style + " background-image:"+this.dataURI()+";"
     node.setAttribute('style',style);
     var tmp = document.createElement("div");
@@ -33,9 +34,8 @@ SVGeneration.Editor = React.createClass({
     return tmp.innerHTML;
   },
   loadData: function(){
-    var img = (/[\?\&]img=(.*)\&?/g).exec(window.location.search)[1];
     $.ajax({
-      url: '/recipes/'+img+'/config.json',
+      url: './config.json',
       type: 'get',
       success: function (data) {
         var currentParameters = {};
@@ -49,7 +49,7 @@ SVGeneration.Editor = React.createClass({
       }.bind(this)
     });
     $.ajax({
-      url: '/recipes/'+img+'/script.js',
+      url: './script.js',
       type: 'get',
       success: function (data) {
         this.setState({script: data});
@@ -58,6 +58,11 @@ SVGeneration.Editor = React.createClass({
   },
   navigate: function(active){
     this.setState({active: active})
+  },
+  setParam: function(key, value){
+    var newParams = this.state.currentParameters;
+    newParams[key] = value;
+    this.setState({currentParameters: newParams});
   },
   generate: function(){
     var params = [];
@@ -77,7 +82,7 @@ SVGeneration.Editor = React.createClass({
   render: function() {
     var inner;
     var img;
-    var topPadding = this.state.windowHeight - 64 - 164;
+    var topPadding = this.state.windowHeight - 64 - 256;
     if(this.state.image && this.state.script){
       img = (<div className="target-wrap" dangerouslySetInnerHTML={{__html: this.renderSVG()}}></div>);
       this.generate();
@@ -85,10 +90,10 @@ SVGeneration.Editor = React.createClass({
         <div>
           <div className="description">
             <h1 className='image-title'>{this.state.image.title}</h1>
-            <p className='image-description'>{this.state.image.instructions}</p>
+            <p className='image-description' dangerouslySetInnerHTML={{__html:this.state.image.instructions}} />
           </div>
           <SVGeneration.TabBar navigate={this.navigate} active={this.state.active}/>
-          <SVGeneration.Tabs image={this.state.image} active={this.state.active}  style={{height: this.state.windowHeight-128}}/>
+          <SVGeneration.Tabs setParam={this.setParam} image={this.state.image} active={this.state.active}  style={{height: this.state.windowHeight-128}}/>
         </div>
       )
       var style = {
@@ -96,9 +101,11 @@ SVGeneration.Editor = React.createClass({
         opacity: 1,
       }
     } else {
-      inner = (<div>
-              Loading Data
-            </div>);
+      inner = (
+        <div>
+          Loading Data
+        </div>
+      );
       var style = {paddingTop: topPadding, opacity: 0};
     }
     return (
@@ -137,11 +144,11 @@ SVGeneration.Tabs = React.createClass({
   render: function(){
     var inner = '';
     if (this.props.active == 'Parameters') {
-      inner = <SVGeneration.ParamsTab />
+      inner = <SVGeneration.ParamsTab setParam={this.props.setParam} image={this.props.image} />
     } else if (this.props.active == 'Source Code') {
-      inner = <SVGeneration.SourceTab />
+      inner = <SVGeneration.SourceTab image={this.props.image} />
     } else {
-      inner = <SVGeneration.ExportTab />
+      inner = <SVGeneration.ExportTab image={this.props.image} />
     }
     return (
       <div style={this.props.style} className="inner-tab">
@@ -152,10 +159,25 @@ SVGeneration.Tabs = React.createClass({
 });
 
 SVGeneration.ParamsTab = React.createClass({
+  renderParam: function(param){
+    var props = {
+      param: param,
+      setParam: this.props.setParam
+    }
+    if(param.type == 'int'){
+      return <SVGeneration.IntegerSlider {...props} />
+    } else if(param.type == 'color'){
+      return <SVGeneration.ColorPicker {...props} />
+    } else {
+      return <input />
+    }
+  },
   render: function(){
     return (
-      <div className="">
-        Params
+      <div className="params">
+        {
+          this.props.image.parameters.map(this.renderParam)
+        }
       </div>
     );
   }
@@ -182,14 +204,51 @@ SVGeneration.ExportTab = React.createClass({
 });
 
 SVGeneration.IntegerSlider = React.createClass({
+  componentDidMount: function() {
+    var step = 10;
+     if (this.props.param.max - this.props.param.min < 5){
+      step = .01;
+    } else if (this.props.param.max - this.props.param.min < 10) {
+      step = .1;
+    } else if (this.props.param.max - this.props.param.min < 100){
+      step = 1;
+    }
+    var options = {
+      min: this.props.param.min,
+      max: this.props.param.max,
+      step: step,
+      value: this.props.param.default,
+      slide: function(event, ui){
+        this.props.setParam(this.props.param.name, ui.value);
+      }.bind(this),
+    };
+    console.log(options)
+    $(React.findDOMNode(this.refs.slider)).slider(options);
+  },
   render: function(){
-    return
+    return (
+      <div className='param-control'>
+        <label htmlFor={"param-" + this.props.param.name}>{this.props.param.name}</label>
+        <div>
+          <input id={"param-" + this.props.param.name} value={this.props.param.value} />
+          <div className='slider' ref='slider' />
+        </div>
+      </div>
+    )
   }
 });
 
 SVGeneration.ColorPicker = React.createClass({
   render: function(){
-    return
+    return (
+      <div className='param-control'>
+        <label htmlFor="">{this.props.param.name}</label>
+        <div>
+          <input id={this.props.param.name} value={this.props.param.value} />
+          <div ref='color-picker' />
+        </div>
+      </div>
+    )
   }
 })
 
