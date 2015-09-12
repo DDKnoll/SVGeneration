@@ -77,7 +77,7 @@ module.exports = function (grunt) {
         expand: true
       },
       all: {
-        src: ['*.css', '*.html', 'images/**/*', 'sources/**/*', 'recipes/**/*', '!Gruntfile.js'],
+        src: ['*.css', 'CNAME', '*.html', 'images/**/*', 'sources/**/*', 'recipes/**/*', '!Gruntfile.js'],
         dest: 'dist/',
       },
     },
