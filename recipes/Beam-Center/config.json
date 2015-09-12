@@ -1,7 +1,7 @@
 {
   "filename":"beam_center",
   "title":"Beam Center",
-  "related":"",
+  "related":"", "author": {"href":"https://github.com/ddknoll", "name": "ddknoll"},
   "shade":"dark",
   "tags":["fullscreen","beam","center","ray","pattern","texture","futuristic"],
   "shortDescription":"Bold and beautiful. This is a perfect example of the scalability of svg.",

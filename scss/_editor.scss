@@ -23,6 +23,7 @@
   .image-title {
     font-weight: 300;
     font-size: 24px;
+    margin: 4px 0;
   }
   .show-more{
     cursor:pointer;
@@ -34,6 +35,17 @@
     display:none;
     opacity:0;
     transition: .2s opacity ease-in;
+    .by, .github-source{
+      font-weight:300;
+      font-size:14px;
+      margin-right: 24px;
+    }
+    .author{
+      font-weight: 400;
+      font-size:15px;
+      color: $gray-3;
+      text-decoration: none;
+    }
     &.visible{
       display:block;
       opacity: 1;
@@ -98,7 +110,9 @@
     top: 0;
     padding:0;
     height:34px;
-    border: none;
+    border: 1px solid #ccc;
+    border-left: none;
+    box-sizing:border-box;
     .sp-preview{
       width:100%;
       height:100%;

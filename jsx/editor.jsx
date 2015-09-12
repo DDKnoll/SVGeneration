@@ -99,10 +99,14 @@ SVGeneration.Editor = React.createClass({
           <div className="description">
             <h1 className='image-title'>{this.state.image.title}</h1>
             <a onClick={this.toggleMore} className="show-more">Show {this.state.showMore ? "Less" : "More"}</a>
-            <p className={ this.state.showMore ? "image-description visible" : 'image-description'} dangerouslySetInnerHTML={{__html:this.state.image.instructions}} />
+            <div className={ this.state.showMore ? "image-description visible" : 'image-description'}>
+              {this.state.image.author ? (<span className='by'>by <a className='author' href={this.state.image.author.href}>{this.state.image.author.name}</a></span>) : ''}
+              <span className='github-source'>source: <a className='github' href={"https://github.com/DDKnoll/SVGeneration/tree/master"+window.location.pathname}><i className="icon-github" /></a></span>
+              <p dangerouslySetInnerHTML={{__html:this.state.image.instructions}} />
+            </div>
           </div>
           <SVGeneration.TabBar navigate={this.navigate} active={this.state.active}/>
-          <SVGeneration.Tabs setParam={this.setParam} currentParameters={this.state.currentParameters} image={this.state.image} active={this.state.active} getSvgCss={this.getSvgCss} script={this.state.script} setScript={this.setScript} style={{height: this.state.windowHeight-128}}/>
+          <SVGeneration.Tabs setParam={this.setParam} currentParameters={this.state.currentParameters} image={this.state.image} active={this.state.active} getSvgCss={this.getSvgCss} script={this.state.script} setScript={this.setScript} style={{minHeight: this.state.windowHeight - 256}}/>
         </div>
       )
       var style = {
@@ -223,7 +227,8 @@ SVGeneration.ExportTab = React.createClass({
 SVGeneration.IntegerSlider = React.createClass({
   componentDidMount: function() {
     var step = 10;
-     if (this.props.param.max - this.props.param.min < 5){
+    var max = parseFloat(this.props.param.max), min = parseFloat(this.props.param.min);
+    if (max - min < 5){
       step = .01;
     } else if (this.props.param.max - this.props.param.min < 10) {
       step = .1;
@@ -231,14 +236,20 @@ SVGeneration.IntegerSlider = React.createClass({
       step = 1;
     }
     $(React.findDOMNode(this.refs.slider)).slider({
-      min: this.props.param.min,
-      max: this.props.param.max,
+      min: min,
+      max: max,
       step: step,
       value: this.props.currentParameters[this.props.param.name],
       slide: function(event, ui){
         this.props.setParam(this.props.param.name, ui.value);
       }.bind(this),
     });
+  },
+  componentWillReceiveProps: function(nextProps) {
+    $(React.findDOMNode(this.refs.slider)).slider("value",nextProps.currentParameters[this.props.param.name]);
+  },
+  _change: function(evt){
+    this.props.setParam(this.props.param.name, evt.target.value);
   },
   render: function(){
     var value = this.props.currentParameters[this.props.param.name];
@@ -249,7 +260,7 @@ SVGeneration.IntegerSlider = React.createClass({
       <div className='param-control'>
         <label htmlFor={"param-" + this.props.param.name}>{this.props.param.name}</label>
         <div className='input-control'>
-          <input id={"param-" + this.props.param.name} value={value} />
+          <input onChange={this._change} id={"param-" + this.props.param.name} value={value} />
           <div className='slider' ref='slider' />
         </div>
       </div>
@@ -271,12 +282,18 @@ SVGeneration.ColorPicker = React.createClass({
       }.bind(this)
     });
   },
+  componentWillReceiveProps: function(nextProps) {
+    $(React.findDOMNode(this.refs.colorPicker)).spectrum("set", "#" + nextProps.currentParameters[this.props.param.name]);
+  },
+  _change: function(evt){
+    this.props.setParam(this.props.param.name, evt.target.value.replace('#',''));
+  },
   render: function(){
     return (
       <div className='param-control'>
         <label htmlFor={"param-"+this.props.param.name}>{this.props.param.name}</label>
         <div className='input-control'>
-          <input ref='colorPickerInput' id={"param-"+this.props.param.name} value={"#" + this.props.currentParameters[this.props.param.name]} />
+          <input onChange={this._change} ref='colorPickerInput' id={"param-"+this.props.param.name} value={"#" + this.props.currentParameters[this.props.param.name]} />
           <input ref='colorPicker' id={"param-"+this.props.param.name} value={"#" + this.props.currentParameters[this.props.param.name]} />
         </div>
       </div>
