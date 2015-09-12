@@ -5,4 +5,5 @@ js/.module-cache
 .grunt/
 CNAME
 recipes/*/index.html
+dist/**/*
 

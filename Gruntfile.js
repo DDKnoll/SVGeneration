@@ -12,7 +12,7 @@ module.exports = function (grunt) {
     pages: [],
     clean: ['dist/*'],
     ejs: {
-      all: {
+      dev: {
         options: {
           env:'dev'
         },
@@ -157,9 +157,9 @@ module.exports = function (grunt) {
 
   require('matchdep').filterDev('grunt-*').forEach(grunt.loadNpmTasks);
 
-  grunt.registerTask('default', ['ejs', 'shell', 'sass', 'build-images', 'bower_concat', 'concat', 'copy']);
+  grunt.registerTask('default', ['ejs:dev', 'shell', 'sass', 'build-images', 'bower_concat', 'concat', 'copy']);
 
-  grunt.registerTask('deploy', ['ejs:production', 'shell', 'sass', 'build-images', 'bower_concat', 'concat', 'copy']);
+  grunt.registerTask('deploy', ['ejs:prod', 'shell', 'sass', 'build-images', 'bower_concat', 'concat', 'copy']);
 
   grunt.registerTask('serve', 'start the static file watch compiler and browsersync', function () {
     grunt.task.run([
