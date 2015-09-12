@@ -159,7 +159,7 @@ module.exports = function (grunt) {
 
   grunt.registerTask('default', ['ejs:dev', 'shell', 'sass', 'build-images', 'bower_concat', 'concat', 'copy']);
 
-  grunt.registerTask('deploy', ['ejs:prod', 'shell', 'sass', 'build-images', 'bower_concat', 'concat', 'copy']);
+  grunt.registerTask('compile-prod', ['ejs:prod', 'shell', 'sass', 'build-images', 'bower_concat', 'concat', 'copy']);
 
   grunt.registerTask('serve', 'start the static file watch compiler and browsersync', function () {
     grunt.task.run([
@@ -182,6 +182,6 @@ module.exports = function (grunt) {
     });
   });
 
-  grunt.registerTask('deploy', ['default', 'gh-pages']);
+  grunt.registerTask('deploy', ['compile-prod', 'gh-pages']);
 
 };
