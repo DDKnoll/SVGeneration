@@ -11,11 +11,20 @@ module.exports = function (grunt) {
   grunt.initConfig({
     pages: [],
     clean: ['dist/*'],
-
     ejs: {
       all: {
         options: {
-          // site-wide vars here
+          env:'dev'
+        },
+        src: ['templates/pages/*.ejs', '!node_modules/**/*'],
+        dest: 'dist/',
+        expand: true,
+        flatten: true,
+        ext: '.html',
+      },
+      prod: {
+        options: {
+          env:'prod'
         },
         src: ['templates/pages/*.ejs', '!node_modules/**/*'],
         dest: 'dist/',
@@ -98,7 +107,7 @@ module.exports = function (grunt) {
       livereload: {
         options: {
           files: [
-            'dist/**/*',
+            'dist/*.html', 'dist/*.css', 'dist/*.js'
           ],
         }
       },
@@ -108,6 +117,10 @@ module.exports = function (grunt) {
 
       grunt: {
         files: 'Gruntfile.js',
+        tasks: ['default'],
+      },
+      images: {
+        files: 'recipes/**/*',
         tasks: ['default'],
       },
       html: {
@@ -145,6 +158,8 @@ module.exports = function (grunt) {
   require('matchdep').filterDev('grunt-*').forEach(grunt.loadNpmTasks);
 
   grunt.registerTask('default', ['ejs', 'shell', 'sass', 'build-images', 'bower_concat', 'concat', 'copy']);
+
+  grunt.registerTask('deploy', ['ejs:production', 'shell', 'sass', 'build-images', 'bower_concat', 'concat', 'copy']);
 
   grunt.registerTask('serve', 'start the static file watch compiler and browsersync', function () {
     grunt.task.run([

@@ -42,9 +42,19 @@ SVGeneration.GraphicList = React.createClass({displayName: "GraphicList",
       graphics: []
     };
   },
+  componentDidMount: function() {
+    $(window).resize(function(){
+      this.setState({ height: ($(window).height()-64) });
+    });
+  },
+  getInitialState: function() {
+    return {
+      height: ($(window).height()-64) 
+    };
+  },
   render: function() {
     return (
-      React.createElement("div", {className: this.props.active ? "active menu-dropdown": "menu-dropdown"}, 
+      React.createElement("div", {style: {height: this.state.height}, className: this.props.active ? "active menu-dropdown": "menu-dropdown"}, 
         React.createElement("ul", null, 
           
             this.props.graphics.map(function(img){

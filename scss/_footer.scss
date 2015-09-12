@@ -1,6 +1,11 @@
-$blue:     #4958B2;
-$orange:   #FF7442;
-$red:      #CA3B07;
-$whiteish: #FDFDFF;
-$green-1:  #7CCC42;
-$green-2:  #5DB220;
+
+#footer {
+  font-size:18px;
+  padding:12px;
+  a {
+    text-decoration: none;
+    font-color: $gray-3;
+    font-family: 'Roboto Slab', serif;
+    font-weight: 300;
+  }
+}

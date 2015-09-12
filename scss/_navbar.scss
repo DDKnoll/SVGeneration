@@ -35,12 +35,13 @@ nav{
     right:0;
     top:64px;
     transform: translateX(300px);
-    transition: .5s all ease;
+    transition: .3s opacity ease, .5s translateX ease;
     background-color: #ffffff;
     border:1px solid #eeeeee;
     overflow-y:scroll;
-    max-height:480px;
+    display:none;
     &.active{
+      display:block;
       transform: translateX(0px);
       opacity:1;
     }
