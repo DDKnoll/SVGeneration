@@ -85,7 +85,8 @@ SVGeneration.Editor = React.createClass({displayName: "Editor",
                   + this.state.script
                   + "\n return generate(params); \n"
                   + '})();'
-    return eval(script);
+    var code = babel.transform(script).code
+    return eval(code);
   },
   render: function() {
     var inner;
@@ -106,7 +107,7 @@ SVGeneration.Editor = React.createClass({displayName: "Editor",
             )
           ), 
           React.createElement(SVGeneration.TabBar, {navigate: this.navigate, active: this.state.active}), 
-          React.createElement(SVGeneration.Tabs, {setParam: this.setParam, currentParameters: this.state.currentParameters, image: this.state.image, active: this.state.active, getSvgCss: this.getSvgCss, script: this.state.script, setScript: this.setScript, style: {minHeight: this.state.windowHeight - 256}})
+          React.createElement(SVGeneration.Tabs, {setParam: this.setParam, currentParameters: this.state.currentParameters, image: this.state.image, active: this.state.active, getSvgCss: this.getSvgCss, generate: this.generate, script: this.state.script, setScript: this.setScript, style: {minHeight: this.state.windowHeight - 256}})
         )
       )
       var style = {
@@ -197,15 +198,23 @@ SVGeneration.ParamsTab = React.createClass({displayName: "ParamsTab",
 SVGeneration.SourceTab = React.createClass({displayName: "SourceTab",
   componentDidMount: function() {
     this.editor = ace.edit('ace-editor');
-    this.editor.setTheme("ace/theme/monokai");
-    this.editor.getSession().setMode("ace/mode/javascript");
+    this.editor.setTheme("/ace/theme/monokai");
+    this.editor.getSession().setMode("/ace/mode/javascript");
+    this.editor.setValue(this.props.script);
+    this.editor.on("blur",function(e){
+      this.props.setScript(this.editor.getValue());
+    }.bind(this));
   },
   editor: undefined,
   render: function(){
     return (
       React.createElement("div", {className: "source-tab"}, 
-        React.createElement("div", {ref: "editor", id: "ace-editor"}, 
-          this.props.script
+        React.createElement("div", {ref: "editor", id: "ace-editor"}), 
+        React.createElement("h3", null, "Output SVG"), 
+        React.createElement("div", {className: "output", ref: "output"}, 
+          React.createElement("pre", null, 
+          this.props.generate()
+          )
         )
       )
     );
@@ -216,9 +225,11 @@ SVGeneration.ExportTab = React.createClass({displayName: "ExportTab",
   render: function(){
     return (
       React.createElement("div", {className: ""}, 
+        React.createElement("h3", null, "Exportable CSS"), 
         React.createElement("pre", null, 
           this.props.getSvgCss()
-        )
+        ), 
+        React.createElement("a", {href: 'data:text/plain;charset=utf-8,' + encodeURIComponent(this.props.generate()), className: "button-blue", download: this.props.image.filename + ".svg"}, "Download SVG")
       )
     );
   }

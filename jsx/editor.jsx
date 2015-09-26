@@ -85,7 +85,8 @@ SVGeneration.Editor = React.createClass({
                   + this.state.script
                   + "\n return generate(params); \n"
                   + '})();'
-    return eval(script);
+    var code = babel.transform(script).code
+    return eval(code);
   },
   render: function() {
     var inner;
@@ -106,7 +107,7 @@ SVGeneration.Editor = React.createClass({
             </div>
           </div>
           <SVGeneration.TabBar navigate={this.navigate} active={this.state.active}/>
-          <SVGeneration.Tabs setParam={this.setParam} currentParameters={this.state.currentParameters} image={this.state.image} active={this.state.active} getSvgCss={this.getSvgCss} script={this.state.script} setScript={this.setScript} style={{minHeight: this.state.windowHeight - 256}}/>
+          <SVGeneration.Tabs setParam={this.setParam} currentParameters={this.state.currentParameters} image={this.state.image} active={this.state.active} getSvgCss={this.getSvgCss} generate={this.generate} script={this.state.script} setScript={this.setScript} style={{minHeight: this.state.windowHeight - 256}}/>
         </div>
       )
       var style = {
@@ -197,15 +198,23 @@ SVGeneration.ParamsTab = React.createClass({
 SVGeneration.SourceTab = React.createClass({
   componentDidMount: function() {
     this.editor = ace.edit('ace-editor');
-    this.editor.setTheme("ace/theme/monokai");
-    this.editor.getSession().setMode("ace/mode/javascript");
+    this.editor.setTheme("/ace/theme/monokai");
+    this.editor.getSession().setMode("/ace/mode/javascript");
+    this.editor.setValue(this.props.script);
+    this.editor.on("blur",function(e){
+      this.props.setScript(this.editor.getValue());
+    }.bind(this));
   },
   editor: undefined,
   render: function(){
     return (
       <div className="source-tab">
-        <div ref='editor' id='ace-editor'>
-          {this.props.script}
+        <div ref='editor' id='ace-editor'></div>
+        <h3>Output SVG</h3>
+        <div className='output' ref='output'>
+          <pre>
+          {this.props.generate()}
+          </pre>
         </div>
       </div>
     );
@@ -216,9 +225,11 @@ SVGeneration.ExportTab = React.createClass({
   render: function(){
     return (
       <div className="">
+        <h3>Exportable CSS</h3>
         <pre>
           {this.props.getSvgCss()}
         </pre>
+        <a href={'data:text/plain;charset=utf-8,' + encodeURIComponent(this.props.generate())} className="button-blue" download={this.props.image.filename + ".svg"}>Download SVG</a>
       </div>
     );
   }

@@ -45,7 +45,7 @@ SVGeneration.GraphicList = React.createClass({displayName: "GraphicList",
   componentDidMount: function() {
     $(window).resize(function(){
       this.setState({ height: ($(window).height()-64) });
-    });
+    }.bind(this));
   },
   getInitialState: function() {
     return {

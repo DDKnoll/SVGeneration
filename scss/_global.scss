@@ -1,0 +1,20 @@
+.button-blue {
+  display:block;
+  max-width: 200px;
+  border-radius: 16px 16px;
+  background-color: white;
+  border: 2px solid $blue;
+  text-decoration: none;
+  font-size:16px;
+  padding:6px;
+  text-align:center;
+  box-sizing:border-box;
+
+  &:hover{
+    color: white;
+    background-color: $blue;
+  }
+}
+.svg {
+
+}

@@ -2,6 +2,7 @@ module.exports = function (grunt) {
 
   var concatJS = [
     'js/_bower.js',
+    'js/browser.js',
     'js/global.js',
     'js/navbar.js',
     'js/editor.js',
