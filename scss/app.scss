@@ -1,23 +1,25 @@
 @import './variables';
-@import './navbar';
-@import './footer';
-@import './editor';
-@import './showcase';
 @import './global';
 
+@import './header';
+
+@import './editor';
+@import './index';
+
+@import './footer';
 body {
-  font-family: 'Roboto', sans-serif;
+  font-family: $body-font;
   font-size:18px;
 }
 
 h1, h2, h3, h4, h5{
-  font-family: 'Roboto Slab', serif;
+  font-family: $header-font, serif;
 }
 
 a {
   color: $blue;
   &:visited{
-    color: $blue;
+    color: $link-visited;
   }
 }
 

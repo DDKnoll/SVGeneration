@@ -49,7 +49,7 @@ SVGeneration.GraphicList = React.createClass({
   },
   getInitialState: function() {
     return {
-      height: ($(window).height()-64) 
+      height: ($(window).height()-64)
     };
   },
   render: function() {
@@ -74,8 +74,8 @@ SVGeneration.GraphicList = React.createClass({
 SVGeneration.Icons.Squares = React.createClass({
   render: function() {
     return (
-    <svg width="34px" height="34px" viewBox="-1 -1 36 36" version="1.1" xmlns="http://www.w3.org/2000/svg">
-      <g strokeWidth="1.5" stroke="#4958B2" fill="transparent">
+    <svg className="menu-button" width="34px" height="34px" viewBox="-1 -1 36 36" version="1.1" xmlns="http://www.w3.org/2000/svg">
+      <g>
         <rect x="0" y="0" width="8" height="8"></rect>
         <rect x="12.8447546" y="0" width="8" height="8"></rect>
         <rect x="25.6895093" y="0" width="8" height="8"></rect>
@@ -94,8 +94,8 @@ SVGeneration.Icons.Squares = React.createClass({
 SVGeneration.Icons.Logo = React.createClass({
   render: function() {
     return (
-    <svg width="36px" height="36px" viewBox="0 0 36 36" version="1.1" xmlns="http://www.w3.org/2000/svg">
-        <g fill="#4958B2">
+    <svg className="logo" width="36px" height="36px" viewBox="0 0 36 36" version="1.1" xmlns="http://www.w3.org/2000/svg">
+        <g>
             <path d="M28.5519032,0.537389316 C28.5519032,3.91399836 27.7077507,4.75815051 25.1752944,5.60230303 L24.7532181,5.18022677 C25.1752944,5.60230303 25.1752944,6.44645465 24.7532181,6.86853091 L10.8247058,20.7970432 C9.13640138,22.4853476 6.60394449,19.9528907 8.29224946,18.2645863 L22.2207612,4.3360745 C22.6428374,3.91399836 22.6428374,3.91399836 23.9090656,4.3360745 L23.4869899,3.91399836 C23.9296105,0.961063013 26.2280881,1.69769942 28.592993,0.600620978"></path>
             <path d="M10.4026296,0.959465454 C12.9350865,-1.57299155 17.1558479,2.64776995 14.6233909,5.18022677 L23.9090656,14.4659011 C26.4415225,11.9334442 30.6622839,16.1542056 28.129827,18.6866625 C26.4415225,11.9334442 18.8441523,19.5308144 25.5973706,21.2191195 C23.0649137,23.7515758 18.8441523,19.5308144 21.3766093,16.9983581 L12.0909346,7.71268342 C9.55847764,10.2451398 5.33771608,6.02437839 7.87017297,3.49192222 C9.55847764,10.2451398 17.1558479,2.64776995 10.4026296,0.959465454 L10.4026296,0.959465454 Z"></path>
             <g transform="translate(0.000000, 22.000000)">

@@ -1,1 +1,50 @@
-{"filename":"diag_stripes","title":"Diagonal Stripes","related":"", "author": {"href":"https://github.com/ddknoll", "name": "ddknoll"},"shade":"light","tags":["subtle","simple","diagonal","stripes","angular","basic","essentials","pattern","angular"],"shortDescription":"Very simple. I expect this one to be used many times over.","date":"May 15, 2013","instructions":"You can't go wrong with these stripes.  I prefer to keep them subtle so that they don't detract from the content of your site.  These stripes will never pixelate regardless of screen resolution or zoom level.","bgColor":"background","presets":[{"name":"cream","scale":8,"stripe-width":0.6,"background":"f0edd8","stripe":"f2d2cb"},{"name":"yankee","scale":100,"stripe-width":0.3,"background":"fff","stripe":"021d40"},{"name":"suit-jacket","scale":10,"stripe-width":0.8,"background":"05090f","stripe":"191b29"}],"parameters":[{"name":"scale","type":"int","default":"10","min":1,"max":300},{"name":"stripe","type":"color","default":"ddd"},{"name":"stripe-width","type":"int","default":".5","min":0,"max":3},{"name":"background","type":"color","default":"fff"}]}
+{
+    "filename":"diag_stripes",
+    "title":"Diagonal Stripes",
+    "author":{
+        "href":"https://github.com/ddknoll",
+        "name":"ddknoll"
+    },
+    "shade":"light",
+    "tags":[
+        "subtle",
+        "simple",
+        "diagonal",
+        "stripes",
+        "angular",
+        "basic",
+        "essentials",
+        "pattern",
+        "angular"
+    ],
+    "shortDescription":"Very simple. I expect this one to be used many times over.",
+    "date":"May 15, 2013",
+    "instructions":"You can't go wrong with these stripes.  I prefer to keep them subtle so that they don't detract from the content of your site.  These stripes will never pixelate regardless of screen resolution or zoom level.",
+    "bgColor":"background",
+    "parameters":[
+        {
+            "name":"scale",
+            "type":"int",
+            "default":"10",
+            "min":1,
+            "max":300
+        },
+        {
+            "name":"stripe",
+            "type":"color",
+            "default":"ddd"
+        },
+        {
+            "name":"stripe-width",
+            "type":"int",
+            "default":".5",
+            "min":0,
+            "max":3
+        },
+        {
+            "name":"background",
+            "type":"color",
+            "default":"fff"
+        }
+    ]
+}

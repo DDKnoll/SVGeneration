@@ -13,12 +13,12 @@ nav{
       height:36px;
     }
     .title{
-      font-family: 'Roboto Slab', sans-serif;
+      font-family: $header-font;
       margin-left:16px;
       display:inline-block;
       vertical-align: middle;
       font-size: 24px;
-      color: $blue;
+      color: $orange;
       font-weight:300;
     }
   }
@@ -56,4 +56,12 @@ nav{
       }
     }
   }
+}
+
+svg.logo {
+    fill: $orange;
+}
+svg.menu-button {
+    fill: $orange;
+    stroke: transparent;
 }
