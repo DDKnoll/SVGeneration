@@ -36,6 +36,11 @@ module.exports = function (grunt) {
     },
 
     shell: {
+      'pwd': {
+          command:'pwd',
+          stdout: true,
+          failOnError: true
+      },
       'jsx': {
         command: [
           'jsx -x jsx jsx/ js/',

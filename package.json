@@ -3,9 +3,10 @@
   "version": "0.0.0",
   "description": "Generates SVG images",
   "scripts": {
-    "start": "grunt server",
+    "start": "grunt serve",
     "ghpages": "grunt ghpages"
   },
+  "license": "Apache-2.0",
   "homepage": "http://github.com/ddknoll/SVGeneration",
   "bugs": "http://github.com/ddknoll/SVGeneration/issues",
   "author": {
