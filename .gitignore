@@ -6,4 +6,4 @@ js/.module-cache
 CNAME
 recipes/*/index.html
 dist/**/*
-
+npm-debug.log
